@@ -1,3 +1,9 @@
+
+
+//--------------------PARTIE 1-------------------//
+
+
+
 // Récupération des pièces depuis le fichier JSON
 const reponse = await fetch("pieces-autos.json");
 const pieces = await reponse.json();
@@ -30,74 +36,78 @@ const pieces = await reponse.json();
 // sectionFiches.appendChild(descriptionElement);
 // sectionFiches.appendChild(disponibiliteElement);
 
-for (let i = 0; i < pieces.length; i++) {
-  // Récupération de l'élément du DOM qui accueillera les fiches
-  const sectionFiches = document.querySelector(".fiches");
 
-  // Création d’une balise dédiée à une pièce automobile
-  const pieceElement = document.createElement("article");
+//--------------------PARTIE 2-------------------//
 
-  // On crée les éléments
-  const imageElement = document.createElement("img");
-  const nomElement = document.createElement("h2");
-  const prixElement = document.createElement("p");
-  const categorieElement = document.createElement("p");
-  const descriptionElement = document.createElement("p");
-  const disponibiliteElement = document.createElement("p");
+// for (let i = 0; i < pieces.length; i++) {
+//   // Récupération de l'élément du DOM qui accueillera les fiches
+//   const sectionFiches = document.querySelector(".fiches");
 
-  // On accède à l’indice i de la liste pieces pour configurer la source des éléments.
-  imageElement.src = pieces[i].image;
-  nomElement.innerText = pieces[i].nom;
-  prixElement.innerText = `Prix: ${pieces[i].prix} € (${pieces[i].prix < 35 ? "€" : "€€€"})`;
-  categorieElement.innerText = pieces[i].categorie ?? "Aucune catégorie";
-  descriptionElement.innerText = pieces[i].description ?? "Pas de description pour le moment.";
-  disponibiliteElement.innerText = pieces[i].disponibilite ? "En stock" : "Rupture de stock";
+//   // Création d’une balise dédiée à une pièce automobile
+//   const pieceElement = document.createElement("article");
 
-  // On rattache la balise article à la section Fiches
-  sectionFiches.appendChild(pieceElement);
+//   // On crée les éléments
+//   const imageElement = document.createElement("img");
+//   const nomElement = document.createElement("h2");
+//   const prixElement = document.createElement("p");
+//   const categorieElement = document.createElement("p");
+//   const descriptionElement = document.createElement("p");
+//   const disponibiliteElement = document.createElement("p");
 
-  // On rattache l’image à pieceElement (la balise article)
-  pieceElement.appendChild(imageElement);
-  pieceElement.appendChild(nomElement);
-  pieceElement.appendChild(prixElement);
-  pieceElement.appendChild(categorieElement);
-  pieceElement.appendChild(descriptionElement);
-  pieceElement.appendChild(disponibiliteElement);
-}
+//   // On accède à l’indice i de la liste pieces pour configurer la source des éléments.
+//   imageElement.src = pieces[i].image;
+//   nomElement.innerText = pieces[i].nom;
+//   prixElement.innerText = `Prix: ${pieces[i].prix} € (${pieces[i].prix < 35 ? "€" : "€€€"})`;
+//   categorieElement.innerText = pieces[i].categorie ?? "Aucune catégorie";
+//   descriptionElement.innerText = pieces[i].description ?? "Pas de description pour le moment.";
+//   disponibiliteElement.innerText = pieces[i].disponibilite ? "En stock" : "Rupture de stock";
 
-const boutonTrier = document.querySelector(".btn-trier");
-boutonTrier.addEventListener("click", function () {
-  const piecesOrdonnees = Array.from(pieces);
-  piecesOrdonnees.sort(function (a, b) {
-    return a.prix - b.prix;
-  });
-  console.log(piecesOrdonnees);
-});
+//   // On rattache la balise article à la section Fiches
+//   sectionFiches.appendChild(pieceElement);
 
-const boutonFiltrer = document.querySelector(".btn-filtrer");
-boutonFiltrer.addEventListener("click", function () {
-  const piecesFiltrees = pieces.filter(function (piece) {
-    return piece.prix <= 35;
-  });
-  console.log(piecesFiltrees);
-});
+//   // On rattache l’image à pieceElement (la balise article)
+//   pieceElement.appendChild(imageElement);
+//   pieceElement.appendChild(nomElement);
+//   pieceElement.appendChild(prixElement);
+//   pieceElement.appendChild(categorieElement);
+//   pieceElement.appendChild(descriptionElement);
+//   pieceElement.appendChild(disponibiliteElement);
+// }
 
-const boutonTrierDecroissant = document.querySelector(".btn-trier-decroissant");
-boutonTrierDecroissant.addEventListener("click", function () {
-  const piecesOrdonnees = Array.from(pieces);
-  piecesOrdonnees.sort(function (a, b) {
-    return b.prix - a.prix;
-  });
-  console.log(piecesOrdonnees);
-});
+// //Ajout du listenner pour filtrer les pièces par catégorie
+// const boutonTrier = document.querySelector(".btn-trier");
+// boutonTrier.addEventListener("click", function () {
+//   const piecesOrdonnees = Array.from(pieces);
+//   piecesOrdonnees.sort(function (a, b) {
+//     return a.prix - b.prix;
+//   });
+//   console.log(piecesOrdonnees);
+// });
 
-const boutonFiltrerDescription = document.querySelector(".btn-filtrer-description");
-boutonFiltrerDescription.addEventListener("click", function () {
-  const piecesFiltrees = pieces.filter(function (piece) {
-    return piece.description;
-  });
-  console.log(piecesFiltrees);
-});
+// const boutonFiltrer = document.querySelector(".btn-filtrer");
+// boutonFiltrer.addEventListener("click", function () {
+//   const piecesFiltrees = pieces.filter(function (piece) {
+//     return piece.prix <= 35;
+//   });
+//   console.log(piecesFiltrees);
+// });
+
+// const boutonTrierDecroissant = document.querySelector(".btn-trier-decroissant");
+// boutonTrierDecroissant.addEventListener("click", function () {
+//   const piecesOrdonnees = Array.from(pieces);
+//   piecesOrdonnees.sort(function (a, b) {
+//     return b.prix - a.prix;
+//   });
+//   console.log(piecesOrdonnees);
+// });
+
+// const boutonFiltrerDescription = document.querySelector(".btn-filtrer-description");
+// boutonFiltrerDescription.addEventListener("click", function () {
+//   const piecesFiltrees = pieces.filter(function (piece) {
+//     return piece.description;
+//   });
+//   console.log(piecesFiltrees);
+// });
 
 
 
@@ -146,3 +156,95 @@ for(let i=0; i < nomsDisponibles.length ; i++){
 }
 // Ajout de l'en-tête puis de la liste au bloc résultats filtres
 document.querySelector('.disponibles').appendChild(disponiblesElements)
+
+
+
+//--------------------PARTIE 3-------------------//
+
+// Efface le contenu de la balise body et donc l’écran
+document.querySelector(".fiches").innerHTML = '';
+
+function genererPieces(pieces) {
+
+for (let i = 0; i < pieces.length; i++) {
+  // Récupération de l'élément du DOM qui accueillera les fiches
+  const sectionFiches = document.querySelector(".fiches");
+
+  // Création d’une balise dédiée à une pièce automobile
+  const pieceElement = document.createElement("article");
+
+  // On crée les éléments
+  const imageElement = document.createElement("img");
+  const nomElement = document.createElement("h2");
+  const prixElement = document.createElement("p");
+  const categorieElement = document.createElement("p");
+  const descriptionElement = document.createElement("p");
+  const disponibiliteElement = document.createElement("p");
+
+  // On accède à l’indice i de la liste pieces pour configurer la source des éléments.
+  imageElement.src = pieces[i].image;
+  nomElement.innerText = pieces[i].nom;
+  prixElement.innerText = `Prix: ${pieces[i].prix} € (${pieces[i].prix < 35 ? "€" : "€€€"})`;
+  categorieElement.innerText = pieces[i].categorie ?? "Aucune catégorie";
+  descriptionElement.innerText = pieces[i].description ?? "Pas de description pour le moment.";
+  disponibiliteElement.innerText = pieces[i].disponibilite ? "En stock" : "Rupture de stock";
+
+  // On rattache la balise article à la section Fiches
+  sectionFiches.appendChild(pieceElement);
+
+  // On rattache l’image à pieceElement (la balise article)
+  pieceElement.appendChild(imageElement);
+  pieceElement.appendChild(nomElement);
+  pieceElement.appendChild(prixElement);
+  pieceElement.appendChild(categorieElement);
+  pieceElement.appendChild(descriptionElement);
+  pieceElement.appendChild(disponibiliteElement);
+}
+}
+
+//Appel de la fonction pour le premier affichage de la page
+genererPieces(pieces);
+
+
+
+//Ajout du listenner pour filtrer les pièces par catégorie
+const boutonTrier = document.querySelector(".btn-trier");
+boutonTrier.addEventListener("click", function () {
+  const piecesOrdonnees = Array.from(pieces);
+  piecesOrdonnees.sort(function (a, b) {
+    return a.prix - b.prix;
+  });
+  document.querySelector(".fiches").innerHTML = '';
+  genererPieces(piecesOrdonnees);
+});
+
+
+const boutonTrierDecroissant = document.querySelector(".btn-trier-decroissant");
+boutonTrierDecroissant.addEventListener("click", function () {
+  const piecesOrdonnees = Array.from(pieces);
+  piecesOrdonnees.sort(function (a, b) {
+    return b.prix - a.prix;
+  });
+  document.querySelector(".fiches").innerHTML = '';
+  genererPieces(piecesOrdonnees);
+});
+
+// Ajout du listener pour filtrer les pièces non abordables
+const boutonFiltrer = document.querySelector(".btn-filtrer");
+boutonFiltrer.addEventListener("click", function () {
+   const piecesFiltrees = pieces.filter(function (piece) {
+       return piece.disponibilite;
+   });
+   // Effacement de l'écran et regénération de la page avec les pièces filtrées uniquement
+  document.querySelector(".fiches").innerHTML = "";
+  genererPieces(piecesFiltrees);
+});
+
+const inputPrixMax = document.querySelector('#prix-max');
+inputPrixMax.addEventListener('input', function(){
+  const piecesFiltrees = pieces.filter(function(piece){
+    return piece.prix <= inputPrixMax.value;
+  });
+  document.querySelector(".fiches").innerHTML = "";
+  genererPieces(piecesFiltrees);
+});
