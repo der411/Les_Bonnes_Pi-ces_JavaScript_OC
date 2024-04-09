@@ -1,10 +1,22 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherGraphiqueAvis } from "./avis.js";
 //--------------------PARTIE 1-------------------//
 
+//Récupération des pièces éventuellement stockées dans le localStorage
+let pieces = window.localStorage.getItem("pieces");
+
+if (pieces === null) {
 
 // Récupération des pièces depuis le fichier JSON
 const reponse = await fetch("http://localhost:8081/pieces");
-const pieces = await reponse.json();
+pieces = await reponse.json();
+
+//Transformation des pièces en JSON
+const valeurPieces = JSON.stringify(pieces);
+//Stockage des informations dans le localStorage
+window.localStorage.setItem("pieces", valeurPieces);
+} else {
+  pieces = JSON.parse(pieces);
+}
 
 // const article = pieces[0];
 
@@ -242,3 +254,11 @@ inputPrixMax.addEventListener("input", function () {
   document.querySelector(".fiches").innerHTML = "";
   genererPieces(piecesFiltrees);
 });
+
+const boutonMettreAJour = document.querySelector(".btn-maj");
+boutonMettreAJour.addEventListener("click", function () {
+  window.localStorage.removeItem("pieces");
+});
+
+
+afficherGraphiqueAvis();

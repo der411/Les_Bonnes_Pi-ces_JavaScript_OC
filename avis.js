@@ -1,3 +1,5 @@
+
+
 export function ajoutListenersAvis() {
   const piecesElements = document.querySelectorAll(".fiches article button");
 
@@ -31,7 +33,7 @@ export function ajoutListenerEnvoyerAvis() {
     };
     
     // Création de la charge utile au format JSON
-    const chargeUtile = JSON.stringify(avis, nbEtoiles);
+    const chargeUtile = JSON.stringify(avis);
     // Appel de la fonction fetch avec toutes les informations nécessaires
     fetch("http://localhost:8081/avis", {
       method: "POST",
@@ -39,4 +41,33 @@ export function ajoutListenerEnvoyerAvis() {
       body: chargeUtile,
     });
   });
+}
+
+export async function afficherGraphiqueAvis() {
+  const avis = await fetch("http://localhost:8081/avis").then(avis => avis.json());
+    const nb_commentaires = [0, 0, 0, 0, 0];
+
+    for (let commentaire of avis) {
+      nb_commentaires[commentaire.nbEtoiles - 1]++;
+    }
+
+    const labels = ["5", "4", "3", "2", "1"];
+
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: "Etoiles attribuées",
+                data: nb_commentaires.reverse(),
+                backgroundColor: "rgba(255, 230, 0, 1)",
+                   
+            }],
+    };
+    const config = {
+        type: "bar",
+        data: data,
+        indexAxis: "y",
+    };
+      
+   new Chart(document.querySelector("#graphique-avis"), config,);
 }
