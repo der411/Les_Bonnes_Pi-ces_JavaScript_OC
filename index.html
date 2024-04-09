@@ -4,11 +4,9 @@
     <meta charset="utf-8" />
     <title>Les Bonnes Pièces</title>
     <link rel="stylesheet" href="styles.css" />
-	<script src="node_modules/chart.js/dist/chart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="avis.js"></script>
     <script type="module" src="pieces.js"></script>
-	
-    
-	
   </head>
   <body>
     <header>
@@ -26,8 +24,8 @@
         <button class="btn-filtrer-description">Filtrer les pièces avec description</button>
         <br />
         <button class="btn-trier-decroissant">Trier par prix décroisant</button>
-		<br />
-		<br/>
+        <br />
+        <br />
         <input type="range" name="prix-max" id="prix-max" min="0" max="60" step="5" />
         <h3>Ajouter un avis</h3>
         <form class="formulaire-avis">
@@ -37,16 +35,18 @@
           <input type="text" name="utilisateur" /><br />
           Avis :<br />
           <input type="text" name="commentaire" /><br />
-		  Note /5 :<br />
-		  <input type="number" name="nb-etoiles" min="0" max="5">
-		  <br />
-		  <br/>
+          Note /5 :<br />
+          <input type="number" name="nb-etoiles" min="0" max="5" />
+          <br />
+          <br />
           <button>Envoyer</button>
         </form>
-		<h3>Données</h3>
-		<button class="btn-maj">Mettre à jour les pièces</button>
-		<h3>Aperçu des avis</h3>
-		<canvas id="graphique-avis" width="300" height="300"></canvas>
+        <h3>Données</h3>
+        <button class="btn-maj">Mettre à jour les pièces</button>
+        <h3>Aperçu des avis</h3>
+        <canvas id="graphique-avis" width="300" height="300"></canvas>
+        <h3>Statistiques commentaires</h3>
+        <canvas id="graphique-dispo" width="300" height="300"></canvas>
       </section>
 
       <!-- Fiches produits -->

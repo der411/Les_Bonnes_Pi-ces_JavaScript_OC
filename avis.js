@@ -43,6 +43,8 @@ export function ajoutListenerEnvoyerAvis() {
   });
 }
 
+//Premier graphique
+
 export async function afficherGraphiqueAvis() {
   const avis = await fetch("http://localhost:8081/avis").then(avis => avis.json());
     const nb_commentaires = [0, 0, 0, 0, 0];
@@ -71,3 +73,67 @@ export async function afficherGraphiqueAvis() {
       
    new Chart(document.querySelector("#graphique-avis"), config,);
 }
+
+
+
+
+// Deuxième graphique
+export async function afficherGraphiqueDispo() {
+  // Récupération des pièces depuis le localStorage
+  const piecesJSON = window.localStorage.getItem("pieces");
+  const pieces = JSON.parse(piecesJSON);
+  console.log(pieces);
+
+  // Récupération des avis depuis l'API
+  const fetchAvis = async () => {
+    const response = await fetch("http://localhost:8081/avis");
+    return response.json();
+  };
+
+  const avis = await fetchAvis();
+  console.log(avis);
+
+  // Calcul du nombre de commentaires
+  let nbCommentairesDispo = 0;
+  let nbCommentairesNonDispo = 0;
+
+  for  (let i = 0; i < avis.length; i++) {
+    const piece = pieces.find(p => p.id === avis[i].pieceId);
+
+    if(piece) {
+      if(piece.disponibilite) {
+        nbCommentairesDispo++;
+      } else {
+        nbCommentairesNonDispo++;
+      }
+    }
+  }
+
+  // Légende qui s'affichera sur la gauche à coté de la barre horizontale
+  const labelsDispo = ["Disponible", "Non dispo."];
+
+  // Données et personnalisation du graphique
+  const dataDispo = {
+    labels: labelsDispo,
+    datasets: [
+      {
+        label: "Nombre de commentaires",
+        data: [nbCommentairesDispo, nbCommentairesNonDispo],
+        backgroundColor: "rgba(0, 230, 255, 1)", // turquoise
+      }
+    ],
+  };
+
+  // Objet de configuration final
+  const configDispo = {
+    type: "bar",
+    data: dataDispo,
+    indexAxis: "y",
+  };
+
+  // Rendu du graphique dans l'élément canvas
+  new Chart(document.querySelector("#graphique-dispo"), configDispo);
+}
+
+
+afficherGraphiqueDispo();
